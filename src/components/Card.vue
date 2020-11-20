@@ -8,7 +8,7 @@
         <img
             ref="image"
             class="w-full h-auto rounded-lg cosha"
-            :src="playlist.artwork.replace('{w}', 200).replace('{h}', 200)"
+            :src="playlist.artwork"
             @load="updateImage('image-' + playlist._id)"
         />
         <div class="text-xs font-medium -space-y-0.5 px-1">
