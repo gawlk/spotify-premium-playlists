@@ -7,7 +7,8 @@
     >
         <img
             ref="image"
-            class="w-full h-auto rounded-lg cosha"
+            :style="`height: ${height}px`"
+            class="w-full h-auto rounded-lg object-cover cosha"
             :src="playlist.artwork"
             @load="updateImage('image-' + playlist._id)"
         />
@@ -23,7 +24,7 @@
 </template>
 
 <script setup="props">
-    import { ref } from 'vue'
+    import { ref, watchEffect } from 'vue'
     import { coshaUpdateImage } from '/src/js/cosha'
 
     export default {
@@ -34,5 +35,16 @@
 
     export const image = ref()
 
-    export const updateImage = (id) => coshaUpdateImage(image.value)
+    export const height = ref(0)
+
+    export const updateImage = (id) => {
+        height.value = image.value.clientWidth
+        coshaUpdateImage(image.value)
+    }
+
+    window.addEventListener('resize', () => {
+        if (height.value > 0) {
+            height.value = image.value.clientWidth
+        }
+    })
 </script>
