@@ -1,15 +1,13 @@
 <template>
     <footer class="space-y-4">
         <div class="flex justify-center space-x-4 font-medium">
-            <!--
             <a
-                href="https://apple-playlists-plus.vercel.app/"
+                href="https://apple-playlists-plus.gawlk.workers.dev/"
                 class="outline-none opacity-50 hover:opacity-75"
             >
                 Apple Music version
             </a>
             <span class="opacity-25">·</span>
-            -->
             <a
                 href="https://github.com/gawlk/spotify-premium-playlists"
                 rel="noopener noreferrer"
