@@ -2,49 +2,47 @@
     <a
         rel="noopener noreferrer"
         target="_blank"
-        :href="playlist.url"
+        :href="props.playlist.url"
         class="transform duration-200 ease-in-out hover:-translate-y-1"
     >
         <img
             ref="image"
             :style="`height: ${height}px`"
             class="w-full h-auto rounded-lg object-cover cosha"
-            :src="playlist.artwork"
-            @load="updateImage('image-' + playlist._id)"
+            :src="props.playlist.artwork"
+            @load="updateImage('image-' + props.playlist._id)"
         />
         <div class="text-xs font-medium -space-y-0.5 px-1">
             <p class="truncate font-bold">
-                {{ playlist.name }}
+                {{ props.playlist.name }}
             </p>
             <p class="truncate opacity-50">
-                {{ playlist.curator }}
+                {{ props.playlist.curator }}
             </p>
         </div>
     </a>
 </template>
 
-<script setup="props">
-    import { ref, watchEffect } from 'vue'
+<script setup>
+    import { defineProps } from 'vue'
     import { coshaUpdateImage } from '/src/js/cosha'
 
-    export default {
-        props: {
-            playlist: Object,
-        },
-    }
+    const props = defineProps({
+        playlist: Object,
+    })
 
-    export const image = ref()
+    ref: image = undefined
 
-    export const height = ref(0)
+    ref: height = 0
 
-    export const updateImage = (id) => {
-        height.value = image.value.clientWidth
-        coshaUpdateImage(image.value)
+    const updateImage = (id) => {
+        height = image.clientWidth
+        coshaUpdateImage(image)
     }
 
     window.addEventListener('resize', () => {
-        if (height.value > 0) {
-            height.value = image.value.clientWidth
+        if (height > 0) {
+            height = image.clientWidth
         }
     })
 </script>

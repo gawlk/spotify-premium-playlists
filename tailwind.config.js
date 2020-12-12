@@ -15,11 +15,6 @@ module.exports = {
       './src/**/*.vue',
     ],
   },
-  future: {
-    purgeLayersByDefault: true,
-    removeDeprecatedGapUtilities: true,
-  },
-  experimental: 'all',
   theme: {
     screens: {
       xs: '420px',
