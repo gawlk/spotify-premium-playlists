@@ -15,7 +15,7 @@
     "@vue/compiler-sfc": "^3.0.4",
     "autoprefixer": "^9",
     "postcss": "^7",
-    "tailwindcss": "^2.0.1@compat",
+    "tailwindcss": "^2.0.1-compat",
     "vite": "1.0.0-rc.13"
   }
 }

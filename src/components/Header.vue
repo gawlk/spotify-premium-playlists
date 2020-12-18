@@ -9,7 +9,7 @@
                     <span class="font-thin text-cyan-500">Playlists</span>
                 </p>
                 <p class="text-lg sm:text-2xl font-medium">
-                    A better way to search for playlists
+                    A better way to discover new playlists
                 </p>
             </div>
         </a>

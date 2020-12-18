@@ -37,7 +37,7 @@
                     />
                 </div>
                 <p class="text-xs font-medium opacity-50 px-1">
-                    Database:
+                    Database (updates daily):
                     {{ counterArtists || '?' }}
                     artists ·
                     {{ counterGenres || '?' }}
