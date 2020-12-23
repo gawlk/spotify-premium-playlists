@@ -1,15 +1,19 @@
 <template>
-    <div class="flex-1 flex space-x-1">
-        <Listbox
-            :elements="genres?.data.map((x) => x.name).sort() || []"
-            :selectedValue="selectedValue"
-            @select="select"
-            defaultEmpty
-            placeholder="Select a genre"
-            roundedClasses="rounded-l-lg sm:rounded-l-none"
-            class="flex-1"
-        />
-        <ButtonReset @click="select()" />
+    <div class="flex-1 relative flex space-x-1">
+        <div class="w-full">
+            <Input
+                :value="input"
+                @input="process($event.target.value)"
+                placeholder="Write a genre here"
+            />
+            <ListboxOptions
+                :elements="genres"
+                :open="genres.length > 0"
+                @selectIndex="select"
+                class="w-48"
+            />
+        </div>
+        <ButtonReset @click="process('')" />
     </div>
 </template>
 
@@ -19,26 +23,21 @@
     import { fetchGQL, getParams, setParam } from '/src/js/utils'
 
     import ButtonReset from '../buttons/ButtonReset.vue'
-    import Listbox from '../listboxes/Listbox.vue'
+    import ListboxOptions from '../listboxes/ListboxOptions.vue'
+    import Input from './Input.vue'
 
     const emit = defineEmit()
 
-    ref: selectedValue = ''
+    ref: input = ''
 
-    ref: genres
+    ref: allGenres = []
 
-    const select = (value) => {
-        if (!value || selectedValue === value) {
-            selectedValue = ''
-            emit('reset')
-        } else {
-            selectedValue = value
-            emit('update', { value })
-        }
-    }
+    ref: genres = []
 
     onMounted(async () => {
-        genres = (
+        input = getParams().value
+
+        allGenres = (
             await fetchGQL(`
                 {
                     allGenres(_size: 100000) {
@@ -48,12 +47,31 @@
                     }
                 }
             `)
-        ).data.allGenres
+        ).data.allGenres.data
+            .map((x) => x.name)
+            .sort()
 
-        window.addEventListener('popstate', () => {
-            const value = getParams().value
-
-            selectedValue = value || ''
+        window.addEventListener('popstate', async () => {
+            input = getParams().value
         })
     })
+
+    const select = (index) => {
+        input = genres[index]
+        emit('update', { value: genres[index] })
+        genres = []
+    }
+
+    const process = (value) => {
+        input = value
+
+        if (value) {
+            genres = allGenres.filter((genre) =>
+                genre.toLowerCase().includes(value.toLowerCase())
+            )
+        } else {
+            genres = []
+            emit('reset')
+        }
+    }
 </script>

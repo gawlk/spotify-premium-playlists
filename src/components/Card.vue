@@ -10,7 +10,7 @@
             :style="`height: ${height}px`"
             class="w-full h-auto rounded-lg object-cover cosha"
             :src="props.playlist.artwork"
-            @load="updateImage('image-' + props.playlist._id)"
+            @load="updateImage"
         />
         <div class="text-xs font-medium -space-y-0.5 px-1">
             <p class="truncate font-bold">
@@ -31,18 +31,16 @@
         playlist: Object,
     })
 
-    ref: image = undefined
+    ref: image
 
     ref: height = 0
 
-    const updateImage = (id) => {
-        height = image.clientWidth
-        coshaUpdateImage(image)
+    const updateImage = () => {
+        if (image) {
+            height = image.clientWidth
+            coshaUpdateImage(image)
+        }
     }
 
-    window.addEventListener('resize', () => {
-        if (height > 0) {
-            height = image.clientWidth
-        }
-    })
+    window.addEventListener('resize', updateImage)
 </script>

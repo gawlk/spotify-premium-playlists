@@ -1,9 +1,11 @@
 <template>
     <header class="text-center flex flex-col justify-center -space-y-2">
         <a :href="url">
-            <img src="/favicon.png" class="h-auto w-48 sm:w-56 mx-auto pb-4" />
+            <img src="/favicon.png" class="h-auto w-40 sm:w-56 mx-auto pb-4" />
             <div class="space-y-1">
-                <p class="text-4xl sm:text-6xl font-semibold text-teal-500">
+                <p
+                    class="text-4xl sm:text-5xl md:text-6xl font-semibold text-teal-500"
+                >
                     <span class="font-black text-green-500">Spotify</span>
                     <br class="sm:hidden" />
                     Premium

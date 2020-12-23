@@ -1,6 +1,6 @@
 <template>
     <div
-        class="max-w-5xl w-full min-h-screen mx-auto px-4 pt-12 pb-16 space-y-24"
+        class="max-w-5xl w-full min-h-screen mx-auto px-4 pt-12 pb-16 space-y-12 sm:space-y-24"
     >
         <Header />
 
@@ -43,9 +43,10 @@
                     {{ counterGenres || '?' }}
                     genres ·
                     {{ counterPlaylists || '?' }}
-                    playlists ·
+                    playlists
+                    <!-- playlists ·
                     {{ counterSongs || '?' }}
-                    songs
+                    songs -->
                 </p>
             </div>
             <div v-if="playlists" class="space-y-16">
@@ -128,7 +129,7 @@
 
     ref: counterPlaylists
 
-    ref: counterSongs
+    // ref: counterSongs
 
     const select = (index) => {
         const { mode } = getParams()
@@ -257,7 +258,7 @@
         counterPlaylists = (await fetchGQL(`{ countPlaylists }`)).data
             .countPlaylists
 
-        counterSongs = (await fetchGQL(`{ countSongs }`)).data.countSongs
+        // counterSongs = (await fetchGQL(`{ countSongs }`)).data.countSongs
     })
 
     const options = [
